@@ -1,16 +1,28 @@
 import 'package:bloc_pattern_sample/second_page.dart';
 import 'package:flutter/material.dart';
 
+import 'blocs/dog_bloc.dart';
 import 'first_page.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final routes = <String, WidgetBuilder>{
     FirstPage.tag: (context) => FirstPage(),
     SecondPage.tag: (context) => SecondPage(),
   };
+
+  @override
+  void dispose() {
+    dogBloc.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
